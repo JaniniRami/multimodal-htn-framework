@@ -2068,57 +2068,6 @@
     },
     {
       "year": "2009",
-      "embla_folder": "49010097 (3)",
-      "patient_id": "49010097",
-      "follow_up": 3,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2009/49010097 (3)/49010097 (3).edf",
-      "edf_file": "49010097 (3).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2009/49010097 (3)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010097/Follow Up 1.pdf",
-      "pdf_file": "Follow Up 1.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.7375,
-        "error": null,
-        "statistics": {
-          "mean_std": 60.68074721297869,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 6.5977077794075,
-          "mean_skewness": 1.9188514718975005,
-          "mean_baseline_wander": 50.38926009713061,
-          "mean_line_noise_ratio": 0.0028389420702063283,
-          "num_windows": 2800,
-          "num_usable_windows": 2065
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.7421428571428571,
-        "error": null,
-        "statistics": {
-          "mean_std": 47.02496193158183,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.6399172349426059,
-          "mean_kurtosis": -0.2900365412478476,
-          "num_windows": 1400,
-          "num_usable_windows": 1039
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to follow up 1",
-      "has_apnea": "yes",
-      "has_cvd": "no",
-      "AHI": "41.1",
-      "apnea_checkboxes": "Restless; Other; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
-    },
-    {
-      "year": "2009",
       "embla_folder": "49010098 (1)",
       "patient_id": "49010098",
       "follow_up": 1,
@@ -3637,8 +3586,8 @@
   ],
   "invalid_mappings": [],
   "summary": {
-    "total_apnea_patients": 72,
-    "total_files": 72,
+    "total_apnea_patients": 71,
+    "total_files": 71,
     "original_total": 107,
     "original_valid": 92,
     "original_invalid": 15
