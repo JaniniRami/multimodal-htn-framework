@@ -18,6 +18,7 @@ matplotlib.use('Agg')  # Non-interactive backend
 import matplotlib.pyplot as plt
 import h5py
 from segment_signal import get_segments
+from extract_hrv_features import merge_ecg_ppg_segments
 
 
 APNEA_EVENTS_NAMES = ["APNEA", "APNEA-CENTRAL", "APNEA-MIXED", "APNEA-OBSTRUCTIVE"]
@@ -721,6 +722,15 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 bag_idx += 1
                 continue
             
+            # Merge segments back into continuous 30-minute signals and extract HRV features
+            merged_ecg, merged_ppg, ecg_hrv_features, ppg_hrv_features = merge_ecg_ppg_segments(
+                valid_ecg_segments, 
+                valid_ppg_segments,
+                ecg_fs=ecg_sampling_rate,
+                ppg_fs=ppg_sampling_rate,
+                segment_duration=30
+            )
+            
             with h5py.File(h5_file, 'w') as f:
                 # Convert lists to numpy arrays
                 f.create_dataset('ecg_segments', data=np.array(valid_ecg_segments))
@@ -730,8 +740,15 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 f.create_dataset('sleep_stages', 
                                 data=[s.encode('utf-8') for s in valid_sleep_stages],
                                 dtype=h5py.special_dtype(vlen=str))
+                # Save HRV features
+                ecg_hrv_group = f.create_group('ecg_hrv')
+                ecg_hrv_group.create_dataset('hrv_hf', data=ecg_hrv_features['hrv_hf'])
+                ecg_hrv_group.create_dataset('hrv_lf', data=ecg_hrv_features['hrv_lf'])
+                ppg_hrv_group = f.create_group('ppg_hrv')
+                ppg_hrv_group.create_dataset('hrv_hf', data=ppg_hrv_features['hrv_hf'])
+                ppg_hrv_group.create_dataset('hrv_lf', data=ppg_hrv_features['hrv_lf'])
             
-            print(f"  Saved bag {bag_idx} with 60 segments to {h5_file}")
+            print(f"  Saved bag {bag_idx} with 60 segments and HRV features to {h5_file}")
             
             # Reset lists for next batch
             valid_ecg_segments = []
@@ -753,6 +770,15 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
         if h5_file.exists():
             print(f"  Skipping final bag {bag_idx} - file already exists: {h5_file}")
         else:
+            # Merge segments back into continuous signals and extract HRV features
+            merged_ecg, merged_ppg, ecg_hrv_features, ppg_hrv_features = merge_ecg_ppg_segments(
+                valid_ecg_segments, 
+                valid_ppg_segments,
+                ecg_fs=ecg_sampling_rate,
+                ppg_fs=ppg_sampling_rate,
+                segment_duration=30
+            )
+            
             with h5py.File(h5_file, 'w') as f:
                 f.create_dataset('ecg_segments', data=np.array(valid_ecg_segments))
                 f.create_dataset('ppg_segments', data=np.array(valid_ppg_segments))
@@ -760,8 +786,15 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 f.create_dataset('sleep_stages',
                                 data=[s.encode('utf-8') for s in valid_sleep_stages],
                                 dtype=h5py.special_dtype(vlen=str))
+                # Save HRV features
+                ecg_hrv_group = f.create_group('ecg_hrv')
+                ecg_hrv_group.create_dataset('hrv_hf', data=ecg_hrv_features['hrv_hf'])
+                ecg_hrv_group.create_dataset('hrv_lf', data=ecg_hrv_features['hrv_lf'])
+                ppg_hrv_group = f.create_group('ppg_hrv')
+                ppg_hrv_group.create_dataset('hrv_hf', data=ppg_hrv_features['hrv_hf'])
+                ppg_hrv_group.create_dataset('hrv_lf', data=ppg_hrv_features['hrv_lf'])
             
-            print(f"  Saved final bag {bag_idx} with {len(valid_ecg_segments)} segments to {h5_file}")
+            print(f"  Saved final bag {bag_idx} with {len(valid_ecg_segments)} segments and HRV features to {h5_file}")
     
     result['success'] = True
     
