@@ -48,7 +48,8 @@
       "has_cvd": "no",
       "AHI": "28.4",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2007",
@@ -98,7 +99,8 @@
       "has_cvd": "no",
       "AHI": "19.8",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2007",
@@ -148,7 +150,8 @@
       "has_cvd": "no",
       "AHI": "6.5",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2007",
@@ -198,7 +201,8 @@
       "has_cvd": "yes",
       "AHI": "17.1",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2007",
@@ -248,7 +252,8 @@
       "has_cvd": "no",
       "AHI": "8.1",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -298,7 +303,8 @@
       "has_cvd": "yes",
       "AHI": "22.3",
       "apnea_checkboxes": "Other | Snooring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -348,7 +354,8 @@
       "has_cvd": "yes",
       "AHI": "13.4",
       "apnea_checkboxes": "Other | Snooring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -399,58 +406,8 @@
       "has_cvd": "yes",
       "AHI": "15.1",
       "apnea_checkboxes": "Restless; Central Sleep Apnea; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
-    },
-    {
-      "year": "2008",
-      "embla_folder": "49010007 (5)",
-      "patient_id": "49010007",
-      "follow_up": 5,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010007 (5)/49010007 (5).edf",
-      "edf_file": "49010007 (5).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010007 (5)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010007/Follow Up 1.pdf",
-      "pdf_file": "Follow Up 1.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.9067725752508361,
-        "error": null,
-        "statistics": {
-          "mean_std": 103.94072082941175,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 16.890922413545358,
-          "mean_skewness": 3.4143792407890317,
-          "mean_baseline_wander": 59.62902905327016,
-          "mean_line_noise_ratio": 0.0008309017860359547,
-          "num_windows": 2392,
-          "num_usable_windows": 2169
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.81438127090301,
-        "error": null,
-        "statistics": {
-          "mean_std": 18.962458100724717,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.6370344764824694,
-          "mean_kurtosis": -0.20208917674664473,
-          "num_windows": 1196,
-          "num_usable_windows": 974
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to follow up 1",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "15.1",
-      "apnea_checkboxes": "Restless; Central Sleep Apnea; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -501,7 +458,8 @@
       "has_cvd": "yes",
       "AHI": "15.1",
       "apnea_checkboxes": "Restless; Central Sleep Apnea; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -551,7 +509,8 @@
       "has_cvd": "yes",
       "AHI": "31.1",
       "apnea_checkboxes": "Restless; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Valvular Heart Disease; Systemic Hypertension"
+      "cvd_checkboxes": "Valvular Heart Disease; Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -601,7 +560,8 @@
       "has_cvd": "yes",
       "AHI": "13.6",
       "apnea_checkboxes": "Restless; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Valvular Heart Disease; Systemic Hypertension"
+      "cvd_checkboxes": "Valvular Heart Disease; Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -651,7 +611,8 @@
       "has_cvd": "yes",
       "AHI": "74.1",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -701,7 +662,8 @@
       "has_cvd": "yes",
       "AHI": "15.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -752,7 +714,8 @@
       "has_cvd": "yes",
       "AHI": "15.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -803,7 +766,8 @@
       "has_cvd": "yes",
       "AHI": "15.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -854,7 +818,8 @@
       "has_cvd": "yes",
       "AHI": "15.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -904,7 +869,8 @@
       "has_cvd": "yes",
       "AHI": "23.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -955,7 +921,8 @@
       "has_cvd": "yes",
       "AHI": "23.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1005,7 +972,8 @@
       "has_cvd": "yes",
       "AHI": "4.9",
       "apnea_checkboxes": "",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1056,7 +1024,8 @@
       "has_cvd": "yes",
       "AHI": "4.9",
       "apnea_checkboxes": "",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1106,7 +1075,8 @@
       "has_cvd": "no",
       "AHI": "5.5",
       "apnea_checkboxes": "Restless; Other | Snooring",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1156,7 +1126,8 @@
       "has_cvd": "no",
       "AHI": "11.1",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1207,57 +1178,8 @@
       "has_cvd": "no",
       "AHI": "15.9",
       "apnea_checkboxes": "Other | Snooring, Microsleep; Narcolepsy/Idiopathic Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
-    },
-    {
-      "year": "2008",
-      "embla_folder": "49010069 (1)",
-      "patient_id": "49010069",
-      "follow_up": 1,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010069 (1)/49010069 (1).edf",
-      "edf_file": "49010069 (1).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010069 (1)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010069/Follow Up 1.pdf",
-      "pdf_file": "Follow Up 1.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.8974358974358975,
-        "error": null,
-        "statistics": {
-          "mean_std": 154.96234023670567,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 9.158242868771822,
-          "mean_skewness": -0.1394735232277544,
-          "mean_baseline_wander": 116.31196969198999,
-          "mean_line_noise_ratio": 0.007181385071137749,
-          "num_windows": 39,
-          "num_usable_windows": 35
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 1.0,
-        "error": null,
-        "statistics": {
-          "mean_std": 57.74819137023346,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.8536026560225263,
-          "mean_kurtosis": -0.5434184799291383,
-          "num_windows": 19,
-          "num_usable_windows": 19
-        }
-      },
-      "is_valid": true,
-      "has_apnea": "yes",
-      "has_cvd": "no",
-      "AHI": "12.8",
-      "apnea_checkboxes": "Other | Snooring, Dry Throat,; Narcolepsy/Idiopathic Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1308,7 +1230,8 @@
       "has_cvd": "no",
       "AHI": "12.8",
       "apnea_checkboxes": "Other | Snooring, Dry Throat,; Narcolepsy/Idiopathic Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1359,7 +1282,8 @@
       "has_cvd": "no",
       "AHI": "12.8",
       "apnea_checkboxes": "Other | Snooring, Dry Throat,; Narcolepsy/Idiopathic Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1409,7 +1333,8 @@
       "has_cvd": "yes",
       "AHI": "13",
       "apnea_checkboxes": "Restless; Narcolepsy/Idiopathic Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Other; Systemic Hypertension"
+      "cvd_checkboxes": "Other; Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1459,7 +1384,8 @@
       "has_cvd": "yes",
       "AHI": "6.8",
       "apnea_checkboxes": "Restless; Other; Insomnia",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1510,58 +1436,8 @@
       "has_cvd": "yes",
       "AHI": "6.8",
       "apnea_checkboxes": "Restless; Other; Insomnia",
-      "cvd_checkboxes": "Systemic Hypertension"
-    },
-    {
-      "year": "2008",
-      "embla_folder": "49010084 (3)",
-      "patient_id": "49010084",
-      "follow_up": 3,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010084 (3)/49010084 (3).edf",
-      "edf_file": "49010084 (3).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2008/49010084 (3)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010084/Follow Up 1.pdf",
-      "pdf_file": "Follow Up 1.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.5797546012269938,
-        "error": null,
-        "statistics": {
-          "mean_std": 160.34568024640527,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 17.743099216311364,
-          "mean_skewness": 3.07911116021376,
-          "mean_baseline_wander": 66.489253646447,
-          "mean_line_noise_ratio": 0.0011581875266266344,
-          "num_windows": 978,
-          "num_usable_windows": 567
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.5807770961145194,
-        "error": null,
-        "statistics": {
-          "mean_std": 40.55415167151314,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.4549928583666499,
-          "mean_kurtosis": -0.43744910605610726,
-          "num_windows": 489,
-          "num_usable_windows": 284
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to follow up 1",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "6.8",
-      "apnea_checkboxes": "Restless; Other; Insomnia",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1612,7 +1488,8 @@
       "has_cvd": "yes",
       "AHI": "6.8",
       "apnea_checkboxes": "Restless; Other; Insomnia",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1662,7 +1539,8 @@
       "has_cvd": "no",
       "AHI": "",
       "apnea_checkboxes": "Other | Snorring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1713,7 +1591,8 @@
       "has_cvd": "no",
       "AHI": "",
       "apnea_checkboxes": "Other | Snorring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1763,7 +1642,8 @@
       "has_cvd": "yes",
       "AHI": "",
       "apnea_checkboxes": "Other | Snorring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2008",
@@ -1813,7 +1693,8 @@
       "has_cvd": "yes",
       "AHI": "94.7",
       "apnea_checkboxes": "Other | Snorring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1863,7 +1744,8 @@
       "has_cvd": "yes",
       "AHI": "21.3",
       "apnea_checkboxes": "Other | Snorring; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1913,7 +1795,8 @@
       "has_cvd": "no",
       "AHI": "22.7",
       "apnea_checkboxes": "Other ( Rhonchopathy",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2008",
@@ -1964,57 +1847,8 @@
       "has_cvd": "no",
       "AHI": "22.7",
       "apnea_checkboxes": "Other ( Rhonchopathy",
-      "cvd_checkboxes": ""
-    },
-    {
-      "year": "2009",
-      "embla_folder": "49010087 (1)",
-      "patient_id": "49010087",
-      "follow_up": 1,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2009/49010087 (1)/49010087 (1).edf",
-      "edf_file": "49010087 (1).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2009/49010087 (1)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010087/Follow Up 1.pdf",
-      "pdf_file": "Follow Up 1.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.963915547024952,
-        "error": null,
-        "statistics": {
-          "mean_std": 266.16788041243956,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 21.124248031447507,
-          "mean_skewness": 4.184850931271653,
-          "mean_baseline_wander": 184.69702592292572,
-          "mean_line_noise_ratio": 0.002911870724857301,
-          "num_windows": 2605,
-          "num_usable_windows": 2511
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.9270353302611367,
-        "error": null,
-        "statistics": {
-          "mean_std": 54.07722330762271,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.8078510886802965,
-          "mean_kurtosis": 0.003194260273966916,
-          "num_windows": 1302,
-          "num_usable_windows": 1207
-        }
-      },
-      "is_valid": true,
-      "has_apnea": "yes",
-      "has_cvd": "no",
-      "AHI": "5.5",
-      "apnea_checkboxes": "Restless; Other | Snooring; Narcolepsy/Idiopathic Hypersomnia",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2064,7 +1898,8 @@
       "has_cvd": "no",
       "AHI": "41.1",
       "apnea_checkboxes": "Restless; Other; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2114,7 +1949,8 @@
       "has_cvd": "no",
       "AHI": "81.9",
       "apnea_checkboxes": "Other | Snorring; Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2009",
@@ -2165,7 +2001,8 @@
       "has_cvd": "no",
       "AHI": "81.9",
       "apnea_checkboxes": "Other | Snorring; Hypersomnia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2215,7 +2052,8 @@
       "has_cvd": "no",
       "AHI": "57.6",
       "apnea_checkboxes": "Other; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2265,7 +2103,8 @@
       "has_cvd": "no",
       "AHI": "",
       "apnea_checkboxes": "Other; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2315,7 +2154,8 @@
       "has_cvd": "no",
       "AHI": "90.6",
       "apnea_checkboxes": "Other; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2009",
@@ -2365,7 +2205,8 @@
       "has_cvd": "no",
       "AHI": "23.2",
       "apnea_checkboxes": "Other | Rhonchopathia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2009",
@@ -2415,7 +2256,8 @@
       "has_cvd": "no",
       "AHI": "56.1",
       "apnea_checkboxes": "Other | Rhonchopathia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2465,7 +2307,8 @@
       "has_cvd": "no",
       "AHI": "9.5",
       "apnea_checkboxes": "Other | Rhonchopathia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2009",
@@ -2515,7 +2358,8 @@
       "has_cvd": "no",
       "AHI": "91.9",
       "apnea_checkboxes": "Other | Rhonchopathia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2009",
@@ -2565,7 +2409,8 @@
       "has_cvd": "no",
       "AHI": "94.6",
       "apnea_checkboxes": "Other | Rhonchopathia; Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2010",
@@ -2615,57 +2460,8 @@
       "has_cvd": "yes",
       "AHI": "25.8",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Tia Or Stroke; Valvular Heart Disease; Systemic Hypertension"
-    },
-    {
-      "year": "2010",
-      "embla_folder": "49010118 (3)",
-      "patient_id": "49010118",
-      "follow_up": 3,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2010/49010118 (3)/49010118 (3).edf",
-      "edf_file": "49010118 (3).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2010/49010118 (3)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010118/Follow Up 3.pdf",
-      "pdf_file": "Follow Up 3.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.9419973833406018,
-        "error": null,
-        "statistics": {
-          "mean_std": 82.69027751300115,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 9.155320882211404,
-          "mean_skewness": -2.4460048635074707,
-          "mean_baseline_wander": 87.5886270184091,
-          "mean_line_noise_ratio": 0.0068203781612901715,
-          "num_windows": 2293,
-          "num_usable_windows": 2160
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.9738219895287958,
-        "error": null,
-        "statistics": {
-          "mean_std": 63.7969514773719,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.45996073168690077,
-          "mean_kurtosis": -1.1137109514126582,
-          "num_windows": 1146,
-          "num_usable_windows": 1116
-        }
-      },
-      "is_valid": true,
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "12.6",
-      "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Tia Or Stroke; Valvular Heart Disease; Systemic Hypertension"
+      "cvd_checkboxes": "Tia Or Stroke; Valvular Heart Disease; Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2010",
@@ -2715,109 +2511,8 @@
       "has_cvd": "yes",
       "AHI": "93.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Tia Or Stroke; Valvular Heart Disease; Systemic Hypertension"
-    },
-    {
-      "year": "2013",
-      "embla_folder": "49010134 (1)",
-      "patient_id": "49010134",
-      "follow_up": 1,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010134 (1)/49010134 (1).edf",
-      "edf_file": "49010134 (1).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010134 (1)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010134/Baseline.pdf",
-      "pdf_file": "Baseline.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.8361142009640341,
-        "error": null,
-        "statistics": {
-          "mean_std": 56.06553498272978,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 15.26050497772652,
-          "mean_skewness": 2.892392276326299,
-          "mean_baseline_wander": 47.89388880242733,
-          "mean_line_noise_ratio": 0.0023158634730605925,
-          "num_windows": 2697,
-          "num_usable_windows": 2255
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.844213649851632,
-        "error": null,
-        "statistics": {
-          "mean_std": 36.83754104777307,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.8781396480057563,
-          "mean_kurtosis": 0.09263190131460465,
-          "num_windows": 1348,
-          "num_usable_windows": 1138
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to baseline",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "33.1",
-      "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Ischemic Heart Disease"
-    },
-    {
-      "year": "2013",
-      "embla_folder": "49010134 (2)",
-      "patient_id": "49010134",
-      "follow_up": 2,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010134 (2)/49010134 (2).edf",
-      "edf_file": "49010134 (2).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010134 (2)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010134/Baseline.pdf",
-      "pdf_file": "Baseline.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.8661513425549227,
-        "error": null,
-        "statistics": {
-          "mean_std": 127.85249244280493,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 8.033028317227126,
-          "mean_skewness": -2.084602070988534,
-          "mean_baseline_wander": 102.80427287627367,
-          "mean_line_noise_ratio": 0.00539516329677361,
-          "num_windows": 2458,
-          "num_usable_windows": 2129
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.8681855166802278,
-        "error": null,
-        "statistics": {
-          "mean_std": 33.93492686076992,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.7969488566689557,
-          "mean_kurtosis": -0.21112270473612058,
-          "num_windows": 1229,
-          "num_usable_windows": 1067
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to baseline",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "33.1",
-      "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Ischemic Heart Disease"
+      "cvd_checkboxes": "Tia Or Stroke; Valvular Heart Disease; Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2013",
@@ -2868,58 +2563,8 @@
       "has_cvd": "yes",
       "AHI": "",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Other; Ischemic Heart Disease; Systemic Hypertension"
-    },
-    {
-      "year": "2013",
-      "embla_folder": "49010143 (1)",
-      "patient_id": "49010143",
-      "follow_up": 1,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010143 (1)/49010143 (1).edf",
-      "edf_file": "49010143 (1).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2013/49010143 (1)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010143/Baseline.pdf",
-      "pdf_file": "Baseline.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.7430167597765364,
-        "error": null,
-        "statistics": {
-          "mean_std": 262.2376666283156,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 16.255701036195166,
-          "mean_skewness": -2.555742654662328,
-          "mean_baseline_wander": 488.608650554463,
-          "mean_line_noise_ratio": 0.043110900125686274,
-          "num_windows": 2327,
-          "num_usable_windows": 1729
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.9621668099742047,
-        "error": null,
-        "statistics": {
-          "mean_std": 39.82851863434668,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.8176496924716125,
-          "mean_kurtosis": 0.6457601096686462,
-          "num_windows": 1163,
-          "num_usable_windows": 1119
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to baseline",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "70.8",
-      "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Other; Ischemic Heart Disease; Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2013",
@@ -2970,7 +2615,8 @@
       "has_cvd": "no",
       "AHI": "15.2",
       "apnea_checkboxes": "",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2013",
@@ -3021,7 +2667,8 @@
       "has_cvd": "no",
       "AHI": "15.2",
       "apnea_checkboxes": "",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2014",
@@ -3072,7 +2719,8 @@
       "has_cvd": "yes",
       "AHI": "29.1",
       "apnea_checkboxes": "Restless; Alveolus Hypoventiliation; Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2016",
@@ -3123,7 +2771,8 @@
       "has_cvd": "no",
       "AHI": "30.4",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2017",
@@ -3174,58 +2823,8 @@
       "has_cvd": "yes",
       "AHI": "89.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Tia Or Stroke; Systemic Hypertension"
-    },
-    {
-      "year": "2017",
-      "embla_folder": "49010199 (2)",
-      "patient_id": "49010199",
-      "follow_up": 2,
-      "edf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2017/49010199 (2)/49010199 (2).edf",
-      "edf_file": "49010199 (2).edf",
-      "has_edf": true,
-      "has_txt": true,
-      "txt_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Embla/2017/49010199 (2)/xx.txt",
-      "is_complete": true,
-      "pdf_path": "/data/R.Janini_Work/SA-CVD/ECG_PPG/multimodal-htn-framework/data/Meta data/49010199/Baseline.pdf",
-      "pdf_file": "Baseline.pdf",
-      "ecg_validation": {
-        "has_ecg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.8330781010719756,
-        "error": null,
-        "statistics": {
-          "mean_std": 74.51000850572167,
-          "mean_saturation": 0.0,
-          "mean_kurtosis": 22.141685754189435,
-          "mean_skewness": -3.7946173816452125,
-          "mean_baseline_wander": 32.953057080397016,
-          "mean_line_noise_ratio": 0.006122564474403435,
-          "num_windows": 2612,
-          "num_usable_windows": 2176
-        }
-      },
-      "ppg_validation": {
-        "has_ppg_channel": true,
-        "is_valid": true,
-        "usable_percentage": 0.7725880551301685,
-        "error": null,
-        "statistics": {
-          "mean_std": 42.20304616618775,
-          "mean_saturation": 0.0,
-          "mean_skewness": 0.826056699634009,
-          "mean_kurtosis": 0.08240321769335494,
-          "num_windows": 1306,
-          "num_usable_windows": 1009
-        }
-      },
-      "is_valid": true,
-      "note": "Linked to baseline",
-      "has_apnea": "yes",
-      "has_cvd": "yes",
-      "AHI": "89.6",
-      "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Tia Or Stroke; Systemic Hypertension"
+      "cvd_checkboxes": "Tia Or Stroke; Systemic Hypertension",
+      "FLIP": 1
     },
     {
       "year": "2017",
@@ -3276,7 +2875,8 @@
       "has_cvd": "no",
       "AHI": "55.3",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2017",
@@ -3327,7 +2927,8 @@
       "has_cvd": "no",
       "AHI": "55.3",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2017",
@@ -3378,7 +2979,8 @@
       "has_cvd": "no",
       "AHI": "55.3",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2017",
@@ -3428,7 +3030,8 @@
       "has_cvd": "yes",
       "AHI": "22.4",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 0
     },
     {
       "year": "2017",
@@ -3479,7 +3082,8 @@
       "has_cvd": "no",
       "AHI": "32.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 0
     },
     {
       "year": "2017",
@@ -3530,7 +3134,8 @@
       "has_cvd": "no",
       "AHI": "32.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": ""
+      "cvd_checkboxes": "",
+      "FLIP": 1
     },
     {
       "year": "2018",
@@ -3581,13 +3186,14 @@
       "has_cvd": "yes",
       "AHI": "14.6",
       "apnea_checkboxes": "Obstructive Sleep Apnea",
-      "cvd_checkboxes": "Systemic Hypertension"
+      "cvd_checkboxes": "Systemic Hypertension",
+      "FLIP": 1
     }
   ],
   "invalid_mappings": [],
   "summary": {
-    "total_apnea_patients": 71,
-    "total_files": 71,
+    "total_apnea_patients": 62,
+    "total_files": 62,
     "original_total": 107,
     "original_valid": 92,
     "original_invalid": 15

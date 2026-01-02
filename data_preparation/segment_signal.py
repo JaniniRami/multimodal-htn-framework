@@ -306,16 +306,16 @@ def get_segments(annotation_file_path, ecg_signal, edf_header, LOOKFOR, segment_
 
         # Skip segments with invalid or missing sleep stages
         if sleep_stage == "SLEEP-MT":
-            print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, SLEEP-MT")
+            # print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, SLEEP-MT")
             continue
         if sleep_stage == "UNKNOWN":
-            print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, UNKNOWN")
+            # print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, UNKNOWN")
             continue
         if sleep_stage == "N/A":
-            print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, N/A")
+            # print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}, N/A")
             continue
         if sleep_stage is None:
-            print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}")
+            # print(f"Sleep stage not found for segment {segment_start_time} - {segment_end_time}")
             continue
         apnea_binary_class = False
         apnea_events_in_segment = []

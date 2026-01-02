@@ -22,6 +22,17 @@ def load_labels_csv(csv_path):
         reader = csv.DictReader(f)
         for row in reader:
             edf_path = row['edf_path']
+            
+            # Convert Flip value to 1 (yes) or 0 (no)
+            flip_value = row.get('Flip', '').strip().lower()
+            if flip_value == 'yes':
+                flip = 1
+            elif flip_value == 'no':
+                flip = 0
+            else:
+                # Default to 0 if empty or unknown value
+                flip = 0
+            
             labels_dict[edf_path] = {
                 'has_apnea': row['has_apnea'],
                 'has_cvd': row['has_cvd'],
@@ -30,7 +41,8 @@ def load_labels_csv(csv_path):
                 'cvd_checkboxes': row['cvd_checkboxes'],
                 'patient_id': row['patient_id'],
                 'follow_up': row['follow_up'] if row['follow_up'] else None,
-                'year': row['year']
+                'year': row['year'],
+                'FLIP': flip
             }
     return labels_dict
 
@@ -66,6 +78,7 @@ def filter_file_mapping(file_mapping_path, labels_dict, output_path):
                 entry['AHI'] = label_info['AHI']
                 entry['apnea_checkboxes'] = label_info['apnea_checkboxes']
                 entry['cvd_checkboxes'] = label_info['cvd_checkboxes']
+                entry['FLIP'] = label_info['FLIP']
                 filtered_valid.append(entry)
     
     # Also check invalid_mappings (though they shouldn't have apnea if they're invalid)
@@ -79,6 +92,7 @@ def filter_file_mapping(file_mapping_path, labels_dict, output_path):
                 entry['AHI'] = label_info['AHI']
                 entry['apnea_checkboxes'] = label_info['apnea_checkboxes']
                 entry['cvd_checkboxes'] = label_info['cvd_checkboxes']
+                entry['FLIP'] = label_info['FLIP']
                 filtered_invalid.append(entry)
     
     # Create filtered mapping
