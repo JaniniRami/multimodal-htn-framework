@@ -723,13 +723,39 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 continue
             
             # Merge segments back into continuous 30-minute signals and extract HRV features
-            merged_ecg, merged_ppg, ecg_hrv_features, ppg_hrv_features = merge_ecg_ppg_segments(
+            _, _, ecg_hrv_features, ppg_hrv_features = merge_ecg_ppg_segments(
                 valid_ecg_segments, 
                 valid_ppg_segments,
                 ecg_fs=ecg_sampling_rate,
                 ppg_fs=ppg_sampling_rate,
                 segment_duration=30
             )
+            
+            # Check for NaN values in HRV features - skip bag if any are NaN
+            has_nan = False
+            if ecg_hrv_features is not None:
+                if (np.isnan(ecg_hrv_features.get('hrv_hf', np.nan)) or 
+                    np.isnan(ecg_hrv_features.get('hrv_lf', np.nan))):
+                    has_nan = True
+            else:
+                has_nan = True
+            
+            if ppg_hrv_features is not None:
+                if (np.isnan(ppg_hrv_features.get('hrv_hf', np.nan)) or 
+                    np.isnan(ppg_hrv_features.get('hrv_lf', np.nan))):
+                    has_nan = True
+            else:
+                has_nan = True
+            
+            if has_nan:
+                print(f"  Skipping bag {bag_idx} for {patient_id} - NaN values in HRV features")
+                # Reset lists for next batch
+                valid_ecg_segments = []
+                valid_ppg_segments = []
+                valid_apnea_labels = []
+                valid_sleep_stages = []
+                bag_idx += 1
+                continue
             
             with h5py.File(h5_file, 'w') as f:
                 # Convert lists to numpy arrays
@@ -779,22 +805,41 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 segment_duration=30
             )
             
-            with h5py.File(h5_file, 'w') as f:
-                f.create_dataset('ecg_segments', data=np.array(valid_ecg_segments))
-                f.create_dataset('ppg_segments', data=np.array(valid_ppg_segments))
-                f.create_dataset('apnea_labels', data=np.array(valid_apnea_labels))
-                f.create_dataset('sleep_stages',
-                                data=[s.encode('utf-8') for s in valid_sleep_stages],
-                                dtype=h5py.special_dtype(vlen=str))
-                # Save HRV features
-                ecg_hrv_group = f.create_group('ecg_hrv')
-                ecg_hrv_group.create_dataset('hrv_hf', data=ecg_hrv_features['hrv_hf'])
-                ecg_hrv_group.create_dataset('hrv_lf', data=ecg_hrv_features['hrv_lf'])
-                ppg_hrv_group = f.create_group('ppg_hrv')
-                ppg_hrv_group.create_dataset('hrv_hf', data=ppg_hrv_features['hrv_hf'])
-                ppg_hrv_group.create_dataset('hrv_lf', data=ppg_hrv_features['hrv_lf'])
+            # Check for NaN values in HRV features - skip bag if any are NaN
+            has_nan = False
+            if ecg_hrv_features is not None:
+                if (np.isnan(ecg_hrv_features.get('hrv_hf', np.nan)) or 
+                    np.isnan(ecg_hrv_features.get('hrv_lf', np.nan))):
+                    has_nan = True
+            else:
+                has_nan = True
             
-            print(f"  Saved final bag {bag_idx} with {len(valid_ecg_segments)} segments and HRV features to {h5_file}")
+            if ppg_hrv_features is not None:
+                if (np.isnan(ppg_hrv_features.get('hrv_hf', np.nan)) or 
+                    np.isnan(ppg_hrv_features.get('hrv_lf', np.nan))):
+                    has_nan = True
+            else:
+                has_nan = True
+            
+            if has_nan:
+                print(f"  Skipping final bag {bag_idx} for {patient_id} - NaN values in HRV features")
+            else:
+                with h5py.File(h5_file, 'w') as f:
+                    f.create_dataset('ecg_segments', data=np.array(valid_ecg_segments))
+                    f.create_dataset('ppg_segments', data=np.array(valid_ppg_segments))
+                    f.create_dataset('apnea_labels', data=np.array(valid_apnea_labels))
+                    f.create_dataset('sleep_stages',
+                                    data=[s.encode('utf-8') for s in valid_sleep_stages],
+                                    dtype=h5py.special_dtype(vlen=str))
+                    # Save HRV features
+                    ecg_hrv_group = f.create_group('ecg_hrv')
+                    ecg_hrv_group.create_dataset('hrv_hf', data=ecg_hrv_features['hrv_hf'])
+                    ecg_hrv_group.create_dataset('hrv_lf', data=ecg_hrv_features['hrv_lf'])
+                    ppg_hrv_group = f.create_group('ppg_hrv')
+                    ppg_hrv_group.create_dataset('hrv_hf', data=ppg_hrv_features['hrv_hf'])
+                    ppg_hrv_group.create_dataset('hrv_lf', data=ppg_hrv_features['hrv_lf'])
+                
+                print(f"  Saved final bag {bag_idx} with {len(valid_ecg_segments)} segments and HRV features to {h5_file}")
     
     result['success'] = True
     
