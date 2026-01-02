@@ -86,29 +86,16 @@ def merge_ecg_ppg_segments(ecg_segments: list, ppg_segments: list,
     # Merge PPG segments
     merged_ppg = merge_segments_with_overlap_removal(ppg_segments, segment_duration, int(ppg_fs))
 
-    start_time = time.time()
     ecg_peaks, _ = nk.ecg_peaks(merged_ecg, sampling_rate=200.0)
-    end_time = time.time()
-    print(f"ECG peaks extraction time: {end_time - start_time} seconds")
-
-    start_time = time.time()
     ecg_hrv = nk.hrv_frequency(ecg_peaks, sampling_rate=200.0, show=False, psd_method="welch")
-    end_time = time.time()
-    print(f"ECG HRV extraction time: {end_time - start_time} seconds")
     
     ecg_hrv_features = {
         "hrv_hf": float(ecg_hrv.get("HRV_HF", [0])[0]),
         "hrv_lf": float(ecg_hrv.get("HRV_LF", [0])[0]),
     }
-    start_time = time.time()
-    ppg_peaks, info = nk.ppg_peaks(merged_ppg, sampling_rate=100,  method="elgendi", show=False)
-    end_time = time.time()
-    print(f"PPG peaks extraction time: {end_time - start_time} seconds")
 
-    start_time = time.time()
+    ppg_peaks, info = nk.ppg_peaks(merged_ppg, sampling_rate=100,  method="elgendi", show=False)
     ppg_hrv = nk.hrv_frequency(ppg_peaks, sampling_rate=100, show=False)
-    end_time = time.time()
-    print(f"PPG HRV extraction time: {end_time - start_time} seconds")
 
     ppg_hrv_features = {
         "hrv_hf": float(ppg_hrv.get("HRV_HF", [0])[0]),
