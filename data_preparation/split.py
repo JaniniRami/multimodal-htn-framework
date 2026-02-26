@@ -10,6 +10,8 @@ from collections import defaultdict
 import random
 
 
+K_FOLDS = 5
+
 def load_file_mapping(json_path):
     """
     Load the file mapping JSON and organize by patient ID.
@@ -231,6 +233,69 @@ def print_split_statistics(splits, stratify_by='has_cvd'):
     print(f"{'='*80}\n")
 
 
+def get_loso_splits(json_path):
+    """
+    Perform Leave-One-Subject-Out (LOSO) cross-validation.
+    
+    This function creates one fold per patient, where all files from that patient
+    are in the test set and all other patients' files are in the training set.
+    All files from the same patient (e.g., 49010018_1, 49010018_2, 49010018_3)
+    will always be grouped together in the same fold.
+    
+    Args:
+        json_path: Path to file_mapping_apnea_only.json
+    
+    Returns:
+        list: List of dictionaries (one per patient), each containing:
+              - 'patient_id': The patient ID used as test set in this fold
+              - 'train_patient_ids': List of all other patient IDs in training set
+              - 'test_patient_ids': List containing only the test patient ID
+              - 'train_entries': List of all file entries (dicts) in training set
+              - 'test_entries': List of all file entries (dicts) in test set
+    """
+    # Load JSON file
+    with open(json_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    # Group entries by patient_id
+    patient_data = defaultdict(lambda: {'entries': []})
+    
+    for entry in data.get('valid_mappings', []):
+        patient_id = entry.get('patient_id')
+        if not patient_id:
+            continue
+        
+        patient_data[patient_id]['entries'].append(entry)
+    
+    # Get all unique patient IDs sorted for consistency
+    all_patient_ids = sorted(patient_data.keys())
+    
+    # Create one split per patient
+    splits = []
+    
+    for test_patient_id in all_patient_ids:
+        # Test set: all entries from this patient
+        test_patient_ids = [test_patient_id]
+        test_entries = patient_data[test_patient_id]['entries'].copy()
+        
+        # Training set: all entries from all other patients
+        train_patient_ids = [pid for pid in all_patient_ids if pid != test_patient_id]
+        train_entries = []
+        
+        for pid in train_patient_ids:
+            train_entries.extend(patient_data[pid]['entries'])
+        
+        splits.append({
+            'patient_id': test_patient_id,  # The patient left out for this fold
+            'train_patient_ids': train_patient_ids,
+            'test_patient_ids': test_patient_ids,
+            'train_entries': train_entries,
+            'test_entries': test_entries
+        })
+    
+    return splits
+
+
 if __name__ == '__main__':
     # Original CSV generation functionality
     base_path = Path(__file__).parent
@@ -251,7 +316,7 @@ if __name__ == '__main__':
     print(f"\nGenerating stratified k-fold splits...")
     splits = get_patient_wise_stratified_kfold_splits(
         json_path, 
-        k=5, 
+        k=K_FOLDS, 
         random_state=42, 
         stratify_by='has_cvd'
     )

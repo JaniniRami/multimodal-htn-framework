@@ -42,3 +42,8 @@ Thumbs.db
 
 # dataset
 data/
+*.pt
+*.png
+*.txt
+*.csv
+/visualisations/

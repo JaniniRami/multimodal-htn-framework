@@ -27,57 +27,6 @@ SLEEP_STAGE_MAPPING = {
 UNKNOWN_SLEEP_STAGE = 0
 
 
-class RandomShift:
-    """Random time shift augmentation for 1D signals."""
-    
-    def __init__(self, max_shift_seconds: float = 2.0, sampling_rate: int = 200):
-        """
-        Args:
-            max_shift_seconds: Maximum shift in seconds
-            sampling_rate: Sampling rate of the signal (Hz)
-        """
-        self.max_shift = int(max_shift_seconds * sampling_rate)
-    
-    def __call__(self, x: torch.Tensor) -> torch.Tensor:
-        """Apply random circular shift to the signal."""
-        shift = int(torch.randint(-self.max_shift, self.max_shift + 1, (1,)))
-        return torch.roll(x, shifts=shift, dims=-1)
-
-
-class GaussianNoise:
-    """Add Gaussian noise to the signal."""
-    
-    def __init__(self, noise_level: float = 0.01):
-        """
-        Args:
-            noise_level: Standard deviation of noise as fraction of signal std
-        """
-        self.noise_level = noise_level
-    
-    def __call__(self, x: torch.Tensor) -> torch.Tensor:
-        """Add Gaussian noise to the signal."""
-        std = x.std(unbiased=False)
-        return x + torch.randn_like(x) * (std * self.noise_level)
-
-
-class AmplitudeScale:
-    """Random amplitude scaling augmentation."""
-    
-    def __init__(self, min_scale: float = 0.9, max_scale: float = 1.1):
-        """
-        Args:
-            min_scale: Minimum scaling factor
-            max_scale: Maximum scaling factor
-        """
-        self.min_scale = min_scale
-        self.max_scale = max_scale
-    
-    def __call__(self, x: torch.Tensor) -> torch.Tensor:
-        """Apply random amplitude scaling."""
-        factor = torch.empty(1).uniform_(self.min_scale, self.max_scale)
-        return x * factor
-
-
 class ECGPPGBagDataset(Dataset):
     """
     Dataset class for ECG-PPG bag-level data with Multiple Instance Learning.
@@ -101,8 +50,7 @@ class ECGPPGBagDataset(Dataset):
         self,
         bags: List[Dict],
         cvd_labels: Optional[Dict[str, int]] = None,
-        augment: bool = False,
-        max_instances: int = 120,
+        max_instances: int = 60,
         min_instances: int = 15,
         ecg_fs: int = 200,
         ppg_fs: int = 100,
@@ -114,15 +62,11 @@ class ECGPPGBagDataset(Dataset):
             bags: List of bag dictionaries from load_data_from_entries()
             cvd_labels: Optional dict mapping bag_id (file_path) to CVD label (0 or 1).
                        If None, CVD labels will be inferred from the data structure.
-            augment: Whether to apply data augmentation during training
             max_instances: Maximum number of segments per bag (for padding/truncation)
             min_instances: Minimum number of segments required to include a bag
-            ecg_fs: ECG sampling rate (Hz) for augmentation
-            ppg_fs: PPG sampling rate (Hz) for augmentation
         """
         self.max_instances = max_instances
         self.min_instances = min_instances
-        self.augment = augment
         self.ecg_fs = ecg_fs
         self.ppg_fs = ppg_fs
         
@@ -152,20 +96,6 @@ class ECGPPGBagDataset(Dataset):
                 # Default: assume all bags are from the same class (will be set externally)
                 self.cvd_labels[bag_id] = 0
         
-        # Setup augmentation pipeline
-        if self.augment:
-            self.ecg_augment = Compose([
-                GaussianNoise(noise_level=0.01),
-                AmplitudeScale(min_scale=0.9, max_scale=1.1),
-                RandomShift(max_shift_seconds=2.0, sampling_rate=ecg_fs),
-            ])
-            
-            self.ppg_augment = Compose([
-                GaussianNoise(noise_level=0.01),
-                AmplitudeScale(min_scale=0.9, max_scale=1.1),
-                RandomShift(max_shift_seconds=2.0, sampling_rate=ppg_fs),
-            ])
-    
     def __len__(self) -> int:
         """Return the number of bags in the dataset."""
         return len(self.bag_ids)
@@ -209,13 +139,9 @@ class ECGPPGBagDataset(Dataset):
         n = len(ecg_segments)
         
         # Down-sample if too many instances
-        if n > self.max_instances:
-            indices = np.random.choice(n, self.max_instances, replace=False)
-            ecg_segments = ecg_segments[indices]
-            ppg_segments = ppg_segments[indices]
-            apnea_labels = apnea_labels[indices]
-            sleep_stages = [sleep_stages[i] for i in indices]
-            n = self.max_instances
+        # Preserve temporal order by taking first max_instances instances
+        # Shuffling is handled at the bag level by DataLoader, not within bags
+        assert n <= self.max_instances, f"Bag {bag_id} has {n} instances, but max_instances is {self.max_instances}"    
         
         # Convert sleep stages from strings to integers
         sleep_stage_ints = []
@@ -262,11 +188,6 @@ class ECGPPGBagDataset(Dataset):
         ppg_t = torch.from_numpy(ppg_segments).float()
         apnea_t = torch.from_numpy(apnea_labels).float()
         sleep_stage_t = torch.from_numpy(sleep_stage_ints).long()
-        
-        # Apply augmentation if enabled
-        if self.augment:
-            ecg_t = torch.stack([self.ecg_augment(x) for x in ecg_t])
-            ppg_t = torch.stack([self.ppg_augment(x) for x in ppg_t])
         
         # Extract HRV features
         # Combine ECG and PPG HRV features into a single vector
@@ -332,7 +253,31 @@ def create_cvd_label_mapping(
         Dictionary mapping bag file_path to CVD label (0 or 1)
     """
     from pathlib import Path
-    from data_loader import get_folder_name
+    import sys
+    import os
+    # Import get_folder_name - handle different import contexts
+    try:
+        from .data_loader import get_folder_name
+    except ImportError:
+        try:
+            from model.data_loader import get_folder_name
+        except ImportError:
+            # Add model directory to path if not already there
+            model_dir = os.path.dirname(os.path.abspath(__file__))
+            if model_dir not in sys.path:
+                sys.path.insert(0, model_dir)
+            try:
+                from data_loader import get_folder_name
+            except ImportError:
+                # Last resort: define it locally
+                def get_folder_name(entry):
+                    """Get the folder name for a given entry."""
+                    patient_id = entry.get('patient_id')
+                    follow_up = entry.get('follow_up')
+                    if follow_up is None:
+                        return patient_id
+                    else:
+                        return f"{patient_id}_{follow_up}"
     
     # Create mapping from folder name to has_cvd label
     folder_to_cvd = {}
@@ -379,8 +324,7 @@ def create_datasets_from_splits(
     train_cvd_labels: Optional[Dict[str, int]] = None,
     test_cvd_labels: Optional[Dict[str, int]] = None,
     data_dir: Optional[str] = None,
-    augment_train: bool = True,
-    max_instances: int = 120,
+    max_instances: int = 60,
     min_instances: int = 15,
     ecg_fs: int = 200,
     ppg_fs: int = 100,
@@ -398,7 +342,6 @@ def create_datasets_from_splits(
         test_cvd_labels: Optional dict mapping bag file_path to CVD label for testing.
                          If None and test_entries provided, will be auto-generated.
         data_dir: Base data directory (required if auto-generating CVD labels)
-        augment_train: Whether to apply augmentation to training set
         max_instances: Maximum number of segments per bag
         min_instances: Minimum number of segments required
         ecg_fs: ECG sampling rate
@@ -417,7 +360,6 @@ def create_datasets_from_splits(
     train_dataset = ECGPPGBagDataset(
         bags=train_bags,
         cvd_labels=train_cvd_labels,
-        augment=augment_train,
         max_instances=max_instances,
         min_instances=min_instances,
         ecg_fs=ecg_fs,
@@ -427,7 +369,6 @@ def create_datasets_from_splits(
     test_dataset = ECGPPGBagDataset(
         bags=test_bags,
         cvd_labels=test_cvd_labels,
-        augment=False,  # Never augment test set
         max_instances=max_instances,
         min_instances=min_instances,
         ecg_fs=ecg_fs,

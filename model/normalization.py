@@ -1,5 +1,9 @@
 """
-Normalization utilities for z-score normalization of data.
+Normalization utilities for signal processing.
+
+- Instance Normalization: Each 30-second segment is normalized independently to have mean=0 and std=1.
+  This is applied to ECG and PPG segments.
+- Robust Scaling: Used for HRV features (scalar values) using median and IQR.
 """
 
 import numpy as np
@@ -7,51 +11,23 @@ import numpy as np
 
 def calculate_normalization_coefficients(train_bags):
     """
-    Calculate z-score normalization coefficients (mean and std) from training data only.
+    Calculate robust scaling normalization coefficients (median and IQR) for HRV features only.
+    
+    For ECG and PPG segments, we use Instance Normalization (each segment normalized independently),
+    so no global coefficients are needed. Only HRV features need pre-computed coefficients.
+    
+    Robust scaling uses:
+    - Median instead of mean (resistant to outliers)
+    - IQR (Interquartile Range = Q3 - Q1) instead of std (describes normal variation)
     
     Args:
         train_bags: List of bag dictionaries from training set
     
     Returns:
-        dict: Dictionary with normalization coefficients:
-            - 'ecg_segments': {'mean': float, 'std': float}
-            - 'ppg_segments': {'mean': float, 'std': float}
-            - 'ecg_hrv': {'hrv_hf': {'mean': float, 'std': float}, 'hrv_lf': {'mean': float, 'std': float}}
-            - 'ppg_hrv': {'hrv_hf': {'mean': float, 'std': float}, 'hrv_lf': {'mean': float, 'std': float}}
+        dict: Dictionary with normalization coefficients for HRV features:
+            - 'ecg_hrv': {'hrv_hf': {'median': float, 'iqr': float}, 'hrv_lf': {'median': float, 'iqr': float}}
+            - 'ppg_hrv': {'hrv_hf': {'median': float, 'iqr': float}, 'hrv_lf': {'median': float, 'iqr': float}}
     """
-    # Collect all ECG segments
-    all_ecg_segments = []
-    for bag in train_bags:
-        all_ecg_segments.append(bag['ecg_segments'])
-    
-    # Collect all PPG segments
-    all_ppg_segments = []
-    for bag in train_bags:
-        all_ppg_segments.append(bag['ppg_segments'])
-    
-    # Calculate coefficients for segments
-    if len(all_ecg_segments) > 0:
-        ecg_concatenated = np.concatenate([seg.flatten() for seg in all_ecg_segments])
-        ecg_segments_mean = np.mean(ecg_concatenated)
-        ecg_segments_std = np.std(ecg_concatenated)
-        # Avoid division by zero
-        if ecg_segments_std == 0:
-            ecg_segments_std = 1.0
-    else:
-        ecg_segments_mean = 0.0
-        ecg_segments_std = 1.0
-    
-    if len(all_ppg_segments) > 0:
-        ppg_concatenated = np.concatenate([seg.flatten() for seg in all_ppg_segments])
-        ppg_segments_mean = np.mean(ppg_concatenated)
-        ppg_segments_std = np.std(ppg_concatenated)
-        # Avoid division by zero
-        if ppg_segments_std == 0:
-            ppg_segments_std = 1.0
-    else:
-        ppg_segments_mean = 0.0
-        ppg_segments_std = 1.0
-    
     # Collect HRV features
     ecg_hrv_hf_values = []
     ecg_hrv_lf_values = []
@@ -66,85 +42,119 @@ def calculate_normalization_coefficients(train_bags):
             ppg_hrv_hf_values.append(bag['ppg_hrv']['hrv_hf'])
             ppg_hrv_lf_values.append(bag['ppg_hrv']['hrv_lf'])
     
-    # Calculate coefficients for ECG HRV features
+    # Calculate robust scaling coefficients for ECG HRV features
     if len(ecg_hrv_hf_values) > 0:
-        ecg_hrv_hf_mean = np.mean(ecg_hrv_hf_values)
-        ecg_hrv_hf_std = np.std(ecg_hrv_hf_values)
-        if ecg_hrv_hf_std == 0:
-            ecg_hrv_hf_std = 1.0
+        ecg_hrv_hf_median = np.median(ecg_hrv_hf_values)
+        q1_ecg_hf = np.percentile(ecg_hrv_hf_values, 25)
+        q3_ecg_hf = np.percentile(ecg_hrv_hf_values, 75)
+        ecg_hrv_hf_iqr = q3_ecg_hf - q1_ecg_hf
+        if ecg_hrv_hf_iqr == 0:
+            ecg_hrv_hf_iqr = 1.0
     else:
-        ecg_hrv_hf_mean = 0.0
-        ecg_hrv_hf_std = 1.0
+        ecg_hrv_hf_median = 0.0
+        ecg_hrv_hf_iqr = 1.0
     
     if len(ecg_hrv_lf_values) > 0:
-        ecg_hrv_lf_mean = np.mean(ecg_hrv_lf_values)
-        ecg_hrv_lf_std = np.std(ecg_hrv_lf_values)
-        if ecg_hrv_lf_std == 0:
-            ecg_hrv_lf_std = 1.0
+        ecg_hrv_lf_median = np.median(ecg_hrv_lf_values)
+        q1_ecg_lf = np.percentile(ecg_hrv_lf_values, 25)
+        q3_ecg_lf = np.percentile(ecg_hrv_lf_values, 75)
+        ecg_hrv_lf_iqr = q3_ecg_lf - q1_ecg_lf
+        if ecg_hrv_lf_iqr == 0:
+            ecg_hrv_lf_iqr = 1.0
     else:
-        ecg_hrv_lf_mean = 0.0
-        ecg_hrv_lf_std = 1.0
+        ecg_hrv_lf_median = 0.0
+        ecg_hrv_lf_iqr = 1.0
     
-    # Calculate coefficients for PPG HRV features
+    # Calculate robust scaling coefficients for PPG HRV features
     if len(ppg_hrv_hf_values) > 0:
-        ppg_hrv_hf_mean = np.mean(ppg_hrv_hf_values)
-        ppg_hrv_hf_std = np.std(ppg_hrv_hf_values)
-        if ppg_hrv_hf_std == 0:
-            ppg_hrv_hf_std = 1.0
+        ppg_hrv_hf_median = np.median(ppg_hrv_hf_values)
+        q1_ppg_hf = np.percentile(ppg_hrv_hf_values, 25)
+        q3_ppg_hf = np.percentile(ppg_hrv_hf_values, 75)
+        ppg_hrv_hf_iqr = q3_ppg_hf - q1_ppg_hf
+        if ppg_hrv_hf_iqr == 0:
+            ppg_hrv_hf_iqr = 1.0
     else:
-        ppg_hrv_hf_mean = 0.0
-        ppg_hrv_hf_std = 1.0
+        ppg_hrv_hf_median = 0.0
+        ppg_hrv_hf_iqr = 1.0
     
     if len(ppg_hrv_lf_values) > 0:
-        ppg_hrv_lf_mean = np.mean(ppg_hrv_lf_values)
-        ppg_hrv_lf_std = np.std(ppg_hrv_lf_values)
-        if ppg_hrv_lf_std == 0:
-            ppg_hrv_lf_std = 1.0
+        ppg_hrv_lf_median = np.median(ppg_hrv_lf_values)
+        q1_ppg_lf = np.percentile(ppg_hrv_lf_values, 25)
+        q3_ppg_lf = np.percentile(ppg_hrv_lf_values, 75)
+        ppg_hrv_lf_iqr = q3_ppg_lf - q1_ppg_lf
+        if ppg_hrv_lf_iqr == 0:
+            ppg_hrv_lf_iqr = 1.0
     else:
-        ppg_hrv_lf_mean = 0.0
-        ppg_hrv_lf_std = 1.0
+        ppg_hrv_lf_median = 0.0
+        ppg_hrv_lf_iqr = 1.0
     
     return {
-        'ecg_segments': {'mean': ecg_segments_mean, 'std': ecg_segments_std},
-        'ppg_segments': {'mean': ppg_segments_mean, 'std': ppg_segments_std},
         'ecg_hrv': {
-            'hrv_hf': {'mean': ecg_hrv_hf_mean, 'std': ecg_hrv_hf_std},
-            'hrv_lf': {'mean': ecg_hrv_lf_mean, 'std': ecg_hrv_lf_std}
+            'hrv_hf': {'median': ecg_hrv_hf_median, 'iqr': ecg_hrv_hf_iqr},
+            'hrv_lf': {'median': ecg_hrv_lf_median, 'iqr': ecg_hrv_lf_iqr}
         },
         'ppg_hrv': {
-            'hrv_hf': {'mean': ppg_hrv_hf_mean, 'std': ppg_hrv_hf_std},
-            'hrv_lf': {'mean': ppg_hrv_lf_mean, 'std': ppg_hrv_lf_std}
+            'hrv_hf': {'median': ppg_hrv_hf_median, 'iqr': ppg_hrv_hf_iqr},
+            'hrv_lf': {'median': ppg_hrv_lf_median, 'iqr': ppg_hrv_lf_iqr}
         }
     }
 
 
 def apply_normalization(bags, norm_coefficients):
     """
-    Apply z-score normalization to bags using pre-computed coefficients.
+    Apply normalization to bags.
+    
+    - Instance Normalization for ECG and PPG segments: Each segment is normalized independently
+      to have mean=0 and std=1. Formula: (x - mean) / std
+    - Robust Scaling for HRV features: Uses pre-computed coefficients (median and IQR).
+      Formula: (x - median) / IQR
     
     Args:
         bags: List of bag dictionaries
         norm_coefficients: Dictionary with normalization coefficients from calculate_normalization_coefficients()
+                          Contains 'median' and 'iqr' keys for HRV features only
     
     Returns:
         list: List of normalized bag dictionaries (modified in-place)
     """
     for bag in bags:
-        # Normalize ECG segments
-        bag['ecg_segments'] = (bag['ecg_segments'] - norm_coefficients['ecg_segments']['mean']) / norm_coefficients['ecg_segments']['std']
+        # Instance Normalization for ECG segments: normalize each segment independently
+        ecg_segments = bag['ecg_segments']  # Shape: (N, L_ecg)
+        if len(ecg_segments) > 0:
+            ecg_segments = np.array(ecg_segments)
+            # Compute mean and std along axis 1 (time dimension) for each segment
+            # Keep dimensions for broadcasting: (N, 1)
+            segment_means = np.mean(ecg_segments, axis=1, keepdims=True)
+            segment_stds = np.std(ecg_segments, axis=1, keepdims=True)
+            # Avoid division by zero
+            segment_stds = np.where(segment_stds == 0, 1.0, segment_stds)
+            # Normalize: (x - mean) / std
+            ecg_segments = (ecg_segments - segment_means) / segment_stds
+            bag['ecg_segments'] = ecg_segments
         
-        # Normalize PPG segments
-        bag['ppg_segments'] = (bag['ppg_segments'] - norm_coefficients['ppg_segments']['mean']) / norm_coefficients['ppg_segments']['std']
+        # Instance Normalization for PPG segments: normalize each segment independently
+        ppg_segments = bag['ppg_segments']  # Shape: (N, L_ppg)
+        if len(ppg_segments) > 0:
+            ppg_segments = np.array(ppg_segments)
+            # Compute mean and std along axis 1 (time dimension) for each segment
+            # Keep dimensions for broadcasting: (N, 1)
+            segment_means = np.mean(ppg_segments, axis=1, keepdims=True)
+            segment_stds = np.std(ppg_segments, axis=1, keepdims=True)
+            # Avoid division by zero
+            segment_stds = np.where(segment_stds == 0, 1.0, segment_stds)
+            # Normalize: (x - mean) / std
+            ppg_segments = (ppg_segments - segment_means) / segment_stds
+            bag['ppg_segments'] = ppg_segments
         
-        # Normalize ECG HRV features
+        # Robust scaling for ECG HRV features
         if bag['ecg_hrv'] is not None:
-            bag['ecg_hrv']['hrv_hf'] = (bag['ecg_hrv']['hrv_hf'] - norm_coefficients['ecg_hrv']['hrv_hf']['mean']) / norm_coefficients['ecg_hrv']['hrv_hf']['std']
-            bag['ecg_hrv']['hrv_lf'] = (bag['ecg_hrv']['hrv_lf'] - norm_coefficients['ecg_hrv']['hrv_lf']['mean']) / norm_coefficients['ecg_hrv']['hrv_lf']['std']
+            bag['ecg_hrv']['hrv_hf'] = (bag['ecg_hrv']['hrv_hf'] - norm_coefficients['ecg_hrv']['hrv_hf']['median']) / norm_coefficients['ecg_hrv']['hrv_hf']['iqr']
+            bag['ecg_hrv']['hrv_lf'] = (bag['ecg_hrv']['hrv_lf'] - norm_coefficients['ecg_hrv']['hrv_lf']['median']) / norm_coefficients['ecg_hrv']['hrv_lf']['iqr']
         
-        # Normalize PPG HRV features
+        # Robust scaling for PPG HRV features
         if bag['ppg_hrv'] is not None:
-            bag['ppg_hrv']['hrv_hf'] = (bag['ppg_hrv']['hrv_hf'] - norm_coefficients['ppg_hrv']['hrv_hf']['mean']) / norm_coefficients['ppg_hrv']['hrv_hf']['std']
-            bag['ppg_hrv']['hrv_lf'] = (bag['ppg_hrv']['hrv_lf'] - norm_coefficients['ppg_hrv']['hrv_lf']['mean']) / norm_coefficients['ppg_hrv']['hrv_lf']['std']
+            bag['ppg_hrv']['hrv_hf'] = (bag['ppg_hrv']['hrv_hf'] - norm_coefficients['ppg_hrv']['hrv_hf']['median']) / norm_coefficients['ppg_hrv']['hrv_hf']['iqr']
+            bag['ppg_hrv']['hrv_lf'] = (bag['ppg_hrv']['hrv_lf'] - norm_coefficients['ppg_hrv']['hrv_lf']['median']) / norm_coefficients['ppg_hrv']['hrv_lf']['iqr']
     
     return bags
 

@@ -340,7 +340,7 @@ class ECGPPGBagDataset(Dataset):
             no_cvd_dataset: dict,
             cvd_dataset: dict,
             augment: bool = False,
-            max_instances: int = 120,
+            max_instances: int = 60,
             min_instances: int = 15
     ):
         """

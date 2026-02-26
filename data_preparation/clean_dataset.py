@@ -21,7 +21,7 @@ from segment_signal import get_segments
 from extract_hrv_features import merge_ecg_ppg_segments
 
 
-APNEA_EVENTS_NAMES = ["APNEA", "APNEA-CENTRAL", "APNEA-MIXED", "APNEA-OBSTRUCTIVE"]
+APNEA_EVENTS_NAMES = ["APNEA", "APNEA-CENTRAL", "APNEA-MIXED", "APNEA-OBSTRUCTIVE", "HYPOPNEA"]
 
 sts_guide = {
     'SLEEP-S0': 0,
@@ -672,7 +672,7 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
                 print(f"Skipping segment {i} for {patient_id} due to IndexError in ECG peaks detection")
                 continue
         ecg_peaks = ecg_info['ECG_R_Peaks']
-        if len(ecg_peaks) <= 15 or len(ecg_peaks) >= 50:
+        if len(ecg_peaks) <= 20 or len(ecg_peaks) >= 80:
             print(f"Skipping segment {i} for {patient_id} due to ECG peaks count out of range, len(ecg_peaks): {len(ecg_peaks)}")
             continue
 
@@ -682,7 +682,7 @@ def process_file(entry: Dict, output_base_dir: Path, save_plot: bool = False, pl
             print(f"Skipping segment {i} for {patient_id} due to IndexError in PPG peaks detection")
             continue
         ppg_peaks = ppg_info['PPG_Peaks']
-        if len(ppg_peaks) <= 15 or len(ppg_peaks) >= 50:
+        if len(ppg_peaks) <= 20 or len(ppg_peaks) >= 80:
             print(f"Skipping segment {i} for {patient_id} due to PPG peaks count out of range, len(ppg_peaks): {len(ppg_peaks)}")
             continue
 
